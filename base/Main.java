@@ -35,12 +35,15 @@ public class Main {
 
 	private void generateDominoes() {
 		_d = new LinkedList<Domino>();
+		_g = new LinkedList<Domino>();
 		int count = 0;
 		int x = 0;
 		int y = 0;
 		for (int l = 0; l <= 6; l++) {
 			for (int h = l; h <= 6; h++) {
 				Domino d = new Domino(h, l);
+				Domino g = new Domino(h, l);
+				_g.add(g);
 				_d.add(d);
 				d.place(x, y, x + 1, y);
 				count++;
@@ -51,24 +54,10 @@ public class Main {
 				}
 			}
 		}
-		if (count != DOMINO_COUNT) {
-			System.out.println("something went wrong generating dominoes");
-			System.exit(0);
-		}
+		dominoAmount(count);
 	}
 
-	private void generateGuesses() {
-		_g = new LinkedList<Domino>();
-		int count = 0;
-		int x = 0;
-		int y = 0;
-		for (int l = 0; l <= 6; l++) {
-			for (int h = l; h <= 6; h++) {
-				Domino d = new Domino(h, l);
-				_g.add(d);
-				count++;
-			}
-		}
+	public void dominoAmount(int count) {
 		if (count != DOMINO_COUNT) {
 			System.out.println("something went wrong generating dominoes");
 			System.exit(0);
@@ -88,9 +77,9 @@ public class Main {
 	}
 
 	void collateGuessGrid() {
-		for (int r = 0; r < 7; r++) {
-			for (int c = 0; c < 8; c++) {
-				gg[r][c] = 9;
+		for (int row = 0; row < 7; row++) {
+			for (int column = 0; column < 8; column++) {
+				gg[row][column] = 9;
 			}
 		}
 		for (Domino d : _g) {
@@ -115,11 +104,11 @@ public class Main {
 		return 11;
 	}
 
-	int printGuessGrid() {
-		for (int are = 0; are < 7; are++) {
-			for (int see = 0; see < 8; see++) {
-				if (gg[are][see] != 9) {
-					System.out.printf("%d", gg[are][see]);
+	public int printGuessGrid() {
+		for (int row = 0; row < GRID_ROW; row++) {
+			for (int column = 0; column < GRID_COLUMN; column++) {
+				if (gg[row][column] != 9) {
+					System.out.printf("%d", gg[row][column]);
 				} else {
 					System.out.print(".");
 				}
@@ -162,10 +151,7 @@ public class Main {
 				y++;
 			}
 		}
-		if (count != DOMINO_COUNT) {
-			System.out.println("something went wrong generating dominoes");
-			System.exit(0);
-		}
+		dominoAmount(count);
 	}
 
 	private void rotateDominoes() {
@@ -389,7 +375,6 @@ public class Main {
 					break;
 				}
 				printGrid();
-				generateGuesses();
 				collateGuessGrid();
 				mode = 1;
 				cheatCount = 0;

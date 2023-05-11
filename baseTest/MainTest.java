@@ -17,6 +17,7 @@ class MainTest {
 	void testPrintGrid() {
 		Main mf = new Main();
 		assertEquals(11, mf.printGrid());
+		assertEquals(11, mf.printGuessGrid());
 	}
 
 }
