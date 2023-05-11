@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
  * @version 2.0, 2014
  */
 
-public class Location extends SpacePlace {
+public class Location {
 	public int c;
 	public int r;
 	public DIRECTION d;
