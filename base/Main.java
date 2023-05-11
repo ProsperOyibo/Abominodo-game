@@ -18,13 +18,14 @@ import javax.swing.JScrollPane;
 
 public class Main {
 
+	private static final int DOMINO_COUNT = 28;
 	private String playerName;
 	public List<Domino> _d;
 	public List<Domino> _g;
 	public int[][] grid = new int[7][8];
 	public int[][] gg = new int[7][8];
 	int mode = -1;
-	int cf;
+	int cheatCount;
 	int score;
 	long startTime;
 
@@ -48,7 +49,7 @@ public class Main {
 				}
 			}
 		}
-		if (count != 28) {
+		if (count != DOMINO_COUNT) {
 			System.out.println("something went wrong generating dominoes");
 			System.exit(0);
 		}
@@ -66,7 +67,7 @@ public class Main {
 				count++;
 			}
 		}
-		if (count != 28) {
+		if (count != DOMINO_COUNT) {
 			System.out.println("something went wrong generating dominoes");
 			System.exit(0);
 		}
@@ -159,7 +160,7 @@ public class Main {
 				y++;
 			}
 		}
-		if (count != 28) {
+		if (count != DOMINO_COUNT) {
 			System.out.println("something went wrong generating dominoes");
 			System.exit(0);
 		}
@@ -389,7 +390,7 @@ public class Main {
 				generateGuesses();
 				collateGuessGrid();
 				mode = 1;
-				cf = 0;
+				cheatCount = 0;
 				score = 0;
 				startTime = System.currentTimeMillis();
 				pf.PictureFrame(this);
@@ -580,14 +581,14 @@ public class Main {
 						}
 						switch (yy) {
 						case 0:
-							switch (cf) {
+							switch (cheatCount) {
 							case 0:
 								System.out.println("Well done");
 								System.out.println("You get a 3 point bonus for honesty");
 								score++;
 								score++;
 								score++;
-								cf++;
+								cheatCount++;
 								break;
 							case 1:
 								System.out
@@ -599,7 +600,7 @@ public class Main {
 									score -= 100;
 								}
 								playerName = playerName + "(scoundrel)";
-								cf++;
+								cheatCount++;
 								break;
 							default:
 								System.out.println("Some people just don't learn");
