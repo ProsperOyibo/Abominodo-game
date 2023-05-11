@@ -18,7 +18,9 @@ import javax.swing.JScrollPane;
 
 public class Main {
 
-	private static final int DOMINO_COUNT = 28;
+	private static final int GRID_COLUMN = 8;
+	private static final int GRID_ROW = 7;
+	public static final int DOMINO_COUNT = 28;
 	private String playerName;
 	public List<Domino> _d;
 	public List<Domino> _g;
@@ -99,11 +101,11 @@ public class Main {
 		}
 	}
 
-	int pg() {
-		for (int are = 0; are < 7; are++) {
-			for (int see = 0; see < 8; see++) {
-				if (grid[are][see] != 9) {
-					System.out.printf("%d", grid[are][see]);
+	public int printGrid() {
+		for (int row = 0; row < GRID_ROW; row++) {
+			for (int column = 0; column < GRID_COLUMN; column++) {
+				if (grid[row][column] != 9) {
+					System.out.printf("%d", grid[row][column]);
 				} else {
 					System.out.print(".");
 				}
@@ -386,7 +388,7 @@ public class Main {
 					collateGrid();
 					break;
 				}
-				pg();
+				printGrid();
 				generateGuesses();
 				collateGuessGrid();
 				mode = 1;
@@ -428,7 +430,7 @@ public class Main {
 
 						break;
 					case 1:
-						pg();
+						printGrid();
 						break;
 					case 2:
 						printGuessGrid();
@@ -733,7 +735,7 @@ public class Main {
 
 				}
 				mode = 0;
-				pg();
+				printGrid();
 				pf.dp.repaint();
 				long now = System.currentTimeMillis();
 				try {

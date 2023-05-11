@@ -4,51 +4,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import base.Main;
+
 class MainTest {
-
+	
 	@Test
-	void testCollateGrid() {
-		fail("Not yet implemented");
+	void testDominoCount() {
+		assertEquals(28, Main.DOMINO_COUNT);
 	}
-
+	
 	@Test
-	void testCollateGuessGrid() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPg() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPrintGuessGrid() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testRun() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testMain() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDrawDominoes() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGecko() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDrawGuesses() {
-		fail("Not yet implemented");
+	void testPrintGrid() {
+		Main mf = new Main();
+		assertEquals(11, mf.printGrid());
 	}
 
 }
