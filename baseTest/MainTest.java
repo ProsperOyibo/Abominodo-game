@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import base.IOSpecialist;
 import base.Main;
 
 class MainTest {
@@ -19,5 +20,6 @@ class MainTest {
 		assertEquals(11, mf.printGrid());
 		assertEquals(11, mf.printGuessGrid());
 	}
+	
 
 }

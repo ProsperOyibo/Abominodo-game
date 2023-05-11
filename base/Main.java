@@ -271,36 +271,11 @@ public class Main {
 	public final int ZERO = 0;
 
 	public void run() {
-		IOSpecialist io = new IOSpecialist();
-
-		System.out
-			.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
-		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-		//    System.out.println("Serial number " + Special.getStamp());
-
-		System.out.println();
-		System.out.println(MultiLingualStringTable.getMessage(0));
-		playerName = io.getString();
-
-		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
-				playerName, MultiLingualStringTable.getMessage(2));
+		IOSpecialist io = welcomeMessage();
 
 		int optionNumber = -9;
 		while (optionNumber != ZERO) {
-			System.out.println();
-			String h1 = "Main menu";
-			String u1 = h1.replaceAll(".", "=");
-			System.out.println(u1);
-			System.out.println(h1);
-			System.out.println(u1);
-			System.out.println("1) Play");
-			// System.out.println("1) Single player play");
-			System.out.println("2) View high scores");
-			System.out.println("3) View rules");
-			// System.out.println("4) Multiplayer play");
-			System.out.println("5) Get inspiration");
-			System.out.println("0) Quit");
-
+			mainMenuOption();
 			optionNumber = -9;
 			while (optionNumber == -9) {
 				try {
@@ -825,6 +800,39 @@ public class Main {
 
 		}
 
+	}
+
+	public void mainMenuOption() {
+		System.out.println();
+		String h1 = "Main menu";
+		String u1 = h1.replaceAll(".", "=");
+		System.out.println(u1);
+		System.out.println(h1);
+		System.out.println(u1);
+		System.out.println("1) Play");
+		// System.out.println("1) Single player play");
+		System.out.println("2) View high scores");
+		System.out.println("3) View rules");
+		// System.out.println("4) Multiplayer play");
+		System.out.println("5) Get inspiration");
+		System.out.println("0) Quit");
+	}
+
+	public IOSpecialist welcomeMessage() {
+		IOSpecialist io = new IOSpecialist();
+
+		System.out
+			.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
+		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
+		//    System.out.println("Serial number " + Special.getStamp());
+
+		System.out.println();
+		System.out.println(MultiLingualStringTable.getMessage(0));
+		playerName = io.getString();
+
+		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
+				playerName, MultiLingualStringTable.getMessage(2));
+		return io;
 	}
 
 	private void recordTheScore() {
