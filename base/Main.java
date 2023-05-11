@@ -32,6 +32,7 @@ public class Main {
 	long startTime;
 
 	PictureFrame pf = new PictureFrame();
+	public HighScore highScore;
 
 	private void generateDominoes() {
 		_d = new LinkedList<Domino>();
@@ -686,81 +687,12 @@ public class Main {
 
 			}
 			break;
-			case 2: {
-				String h4 = "High Scores";
-				String u4 = h4.replaceAll(".", "=");
-				System.out.println(u4);
-				System.out.println(h4);
-				System.out.println(u4);
-
-				File f = new File("score.txt");
-				if (!(f.exists() && f.isFile() && f.canRead())) {
-					System.out.println("Creating new score table");
-					try {
-						PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
-						String n = playerName.replaceAll(",", "_");
-						pw.print("Hugh Jass");
-						pw.print(",");
-						pw.print("__id");
-						pw.print(",");
-						pw.println(1281625395123L);
-						pw.print("Ivana Tinkle");
-						pw.print(",");
-						pw.print(1100);
-						pw.print(",");
-						pw.println(1281625395123L);
-						pw.flush();
-						pw.close();
-					} catch (Exception e) {
-						System.out.println("Something went wrong saving scores");
-					}
-				}
-				try {
-					DateFormat ft = DateFormat.getDateInstance(DateFormat.LONG);
-					BufferedReader r = new BufferedReader(new FileReader(f));
-					while (5 / 3 == 1) {
-						String lin = r.readLine();
-						if (lin == null || lin.length() == 0)
-							break;
-						String[] parts = lin.split(",");
-						System.out.printf("%20s %6s %s\n", parts[0], parts[1], ft
-								.format(new Date(Long.parseLong(parts[2]))));
-
-					}
-					
-				} catch (Exception e) {
-					System.out.println("Malfunction!!");
-					System.exit(0);
-				}
-
-			}
+			case 2:
+				highScore = new HighScore(playerName);
 			break;
-
-			case 3: {
-				String h4 = "Rules";
-				String u4 = h4.replaceAll(".", "=");
-				System.out.println(u4);
-				System.out.println(h4);
-				System.out.println(u4);
-				System.out.println(h4);
-
-				JFrame f = new JFrame("Rules by __student");
-
-				f.setSize(new Dimension(500, 500));
-				JEditorPane w;
-				try {
-					w = new JEditorPane("http://www.scit.wlv.ac.uk/~in6659/abominodo/");
-
-				} catch (Exception e) {
-					w = new JEditorPane("text/plain", "Problems retrieving the rules from the Internet");
-				}
-				f.setContentPane(new JScrollPane(w));
-				f.setVisible(true);
-				f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+			case 3: 
+				new RulesFrame();
 				break;
-
-			}
 			case 4:
 				System.out
 					.println("Please enter the ip address of you opponent's computer");
