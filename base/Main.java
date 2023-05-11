@@ -269,60 +269,30 @@ public class Main {
 	}
 
 	public final int ZERO = 0;
+	
+	public String getPlayerName() {
+		return this.playerName;
+	}
 
 	public void run() {
-		IOSpecialist io = welcomeMessage();
-
+		IOSpecialist io = new IOSpecialist();
+		welcomeMessage();
 		int optionNumber = -9;
 		while (optionNumber != ZERO) {
 			mainMenuOption();
-			optionNumber = -9;
-			while (optionNumber == -9) {
-				try {
-					String s1 = io.getString();
-					optionNumber = Integer.parseInt(s1);
-				} catch (Exception e) {
-					optionNumber = -9;
-				}
-			}
+			optionNumber = getOption(io);
 			switch (optionNumber) {
 			case 5:
-				int index = (int) (Math.random() * (_Q.stuff.length / 3));
-				String what = _Q.stuff[index * 3];
-				String who = _Q.stuff[1 + index * 3];
-				System.out.printf("%s said \"%s\"", who, what);
-				System.out.println();
-				System.out.println();
+				getInspiration();
 				break;
 			case 0: {
-				if (_d == null) {
-					System.out.println("It is a shame that you did not want to play");
-				} else {
-					System.out.println("Thankyou for playing");
-				}
-				System.exit(0);
+				endGame();
 				break;
 			}
 			case 1: {
-				System.out.println();
-				String h4 = "Select difficulty";
-				String u4 = h4.replaceAll(".", "=");
-				System.out.println(u4);
-				System.out.println(h4);
-				System.out.println(u4);
-				System.out.println("1) Simples");
-				System.out.println("2) Not-so-simples");
-				System.out.println("3) Super-duper-shuffled");
-				int c2 = -7;
-				while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
-					try {
-						String s2 = io.getString();
-						c2 = Integer.parseInt(s2);
-					} catch (Exception e) {
-						c2 = -7;
-					}
-				}
-				switch (c2) {
+				selectDifficulty();
+				int difficulty = getDifficulty();
+				switch (difficulty) {
 				case 1:
 					generateDominoes();
 					shuffleDominoesOrder();
@@ -802,6 +772,77 @@ public class Main {
 
 	}
 
+	public void welcomeMessage() {
+		System.out
+			.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
+		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
+		//    System.out.println("Serial number " + Special.getStamp());
+
+		System.out.println();
+		System.out.println(MultiLingualStringTable.getMessage(0));
+		playerName = IOLibrary.getString();
+
+		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
+				playerName, MultiLingualStringTable.getMessage(2));
+	}
+
+	public int getDifficulty() {
+		int difficulty = -7;
+		while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
+			try {
+				String s2 = IOLibrary.getString();
+				difficulty = Integer.parseInt(s2);
+			} catch (Exception e) {
+				difficulty = -7;
+			}
+		}
+		return difficulty;
+	}
+
+	public void endGame() {
+		if (_d == null) {
+			System.out.println("It is a shame that you did not want to play");
+		} else {
+			System.out.println("Thankyou for playing");
+		}
+		System.exit(0);
+	}
+
+	public int getOption(IOSpecialist io) {
+		int optionNumber;
+		optionNumber = -9;
+		while (optionNumber == -9) {
+			try {
+				String s1 = io.getString();
+				optionNumber = Integer.parseInt(s1);
+			} catch (Exception e) {
+				optionNumber = -9;
+			}
+		}
+		return optionNumber;
+	}
+
+	public void selectDifficulty() {
+		System.out.println();
+		String h4 = "Select difficulty";
+		String u4 = h4.replaceAll(".", "=");
+		System.out.println(u4);
+		System.out.println(h4);
+		System.out.println(u4);
+		System.out.println("1) Simples");
+		System.out.println("2) Not-so-simples");
+		System.out.println("3) Super-duper-shuffled");
+	}
+
+	public void getInspiration() {
+		int index = (int) (Math.random() * (_Q.stuff.length / 3));
+		String what = _Q.stuff[index * 3];
+		String who = _Q.stuff[1 + index * 3];
+		System.out.printf("%s said \"%s\"", who, what);
+		System.out.println();
+		System.out.println();
+	}
+
 	public void mainMenuOption() {
 		System.out.println();
 		String h1 = "Main menu";
@@ -818,22 +859,6 @@ public class Main {
 		System.out.println("0) Quit");
 	}
 
-	public IOSpecialist welcomeMessage() {
-		IOSpecialist io = new IOSpecialist();
-
-		System.out
-			.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
-		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-		//    System.out.println("Serial number " + Special.getStamp());
-
-		System.out.println();
-		System.out.println(MultiLingualStringTable.getMessage(0));
-		playerName = io.getString();
-
-		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
-				playerName, MultiLingualStringTable.getMessage(2));
-		return io;
-	}
 
 	private void recordTheScore() {
 		try {
