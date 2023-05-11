@@ -285,8 +285,8 @@ public class Main {
 		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
 				playerName, MultiLingualStringTable.getMessage(2));
 
-		int _$_ = -9;
-		while (_$_ != ZERO) {
+		int optionNumber = -9;
+		while (optionNumber != ZERO) {
 			System.out.println();
 			String h1 = "Main menu";
 			String u1 = h1.replaceAll(".", "=");
@@ -301,16 +301,16 @@ public class Main {
 			System.out.println("5) Get inspiration");
 			System.out.println("0) Quit");
 
-			_$_ = -9;
-			while (_$_ == -9) {
+			optionNumber = -9;
+			while (optionNumber == -9) {
 				try {
 					String s1 = io.getString();
-					_$_ = Integer.parseInt(s1);
+					optionNumber = Integer.parseInt(s1);
 				} catch (Exception e) {
-					_$_ = -9;
+					optionNumber = -9;
 				}
 			}
-			switch (_$_) {
+			switch (optionNumber) {
 			case 5:
 				int index = (int) (Math.random() * (_Q.stuff.length / 3));
 				String what = _Q.stuff[index * 3];
