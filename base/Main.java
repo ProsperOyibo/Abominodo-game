@@ -4,12 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.*;
 import java.net.InetAddress;
-import java.text.DateFormat;
 import java.util.*;
-
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 
 /**
  * @author Kevan Buckley, maintained by __student
@@ -34,6 +29,7 @@ public class Main {
 
 	PictureFrame pf = new PictureFrame();
 	public HighScore highScore;
+	public DisplayMenu menu = new DisplayMenu();
 
 	private void generateDominoes() {
 		_d = new LinkedList<Domino>();
@@ -281,18 +277,18 @@ public class Main {
 		welcomeMessage();
 		int optionNumber = -9;
 		while (optionNumber != ZERO) {
-			mainMenuOption();
+			menu.mainMenuOption();
 			optionNumber = getOption(io);
 			switch (optionNumber) {
 			case 5:
-				getInspiration();
+				menu.getInspiration();
 				break;
 			case 0: {
 				endGame();
 				break;
 			}
 			case 1: {
-				selectDifficulty();
+				menu.selectDifficulty();
 				int difficulty = getDifficulty();
 				switch (difficulty) {
 				case 1:
@@ -331,7 +327,7 @@ public class Main {
 				pf.dp.repaint();
 				int c3 = -7;
 				while (c3 != ZERO) {
-					playMenu();
+					menu.playMenu(playerName);
 					c3 = 9;
 					// make sure the user enters something valid
 					while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
@@ -478,7 +474,7 @@ public class Main {
 						printScore();
 						break;
 					case 6:
-						cheatMenu();
+						menu.cheatMenu();
 						int yy = -9;
 						while (yy < 0 || yy > 4) {
 							try {
@@ -682,39 +678,6 @@ public class Main {
 		System.out.printf("%s your score is %d\n", playerName, score);
 	}
 
-	public void cheatMenu() {
-		System.out.println();
-		String h8 = "So you want to cheat, huh?";
-		String u8 = h8.replaceAll(".", "=");
-		System.out.println(u8);
-		System.out.println(h8);
-		System.out.println(u8);
-		System.out.println("1) Find a particular Domino (costs you 500)");
-		System.out.println("2) Which domino is at ... (costs you 500)");
-		System.out.println("3) Find all certainties (costs you 2000)");
-		System.out.println("4) Find all possibilities (costs you 10000)");
-		System.out.println("0) You have changed your mind about cheating");
-		System.out.println("What do you want to do?");
-	}
-
-	public void playMenu() {
-		System.out.println();
-		String h5 = "Play menu";
-		String u5 = h5.replaceAll(".", "=");
-		System.out.println(u5);
-		System.out.println(h5);
-		System.out.println(u5);
-		System.out.println("1) Print the grid");
-		System.out.println("2) Print the box");
-		System.out.println("3) Print the dominos");
-		System.out.println("4) Place a domino");
-		System.out.println("5) Unplace a domino");
-		System.out.println("6) Get some assistance");
-		System.out.println("7) Check your score");
-		System.out.println("0) Given up");
-		System.out.println("What do you want to do " + playerName + "?");
-	}
-
 	public void welcomeMessage() {
 		System.out
 			.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
@@ -763,43 +726,6 @@ public class Main {
 			}
 		}
 		return optionNumber;
-	}
-
-	public void selectDifficulty() {
-		System.out.println();
-		String h4 = "Select difficulty";
-		String u4 = h4.replaceAll(".", "=");
-		System.out.println(u4);
-		System.out.println(h4);
-		System.out.println(u4);
-		System.out.println("1) Simples");
-		System.out.println("2) Not-so-simples");
-		System.out.println("3) Super-duper-shuffled");
-	}
-
-	public void getInspiration() {
-		int index = (int) (Math.random() * (_Q.stuff.length / 3));
-		String what = _Q.stuff[index * 3];
-		String who = _Q.stuff[1 + index * 3];
-		System.out.printf("%s said \"%s\"", who, what);
-		System.out.println();
-		System.out.println();
-	}
-
-	public void mainMenuOption() {
-		System.out.println();
-		String h1 = "Main menu";
-		String u1 = h1.replaceAll(".", "=");
-		System.out.println(u1);
-		System.out.println(h1);
-		System.out.println(u1);
-		System.out.println("1) Play");
-		// System.out.println("1) Single player play");
-		System.out.println("2) View high scores");
-		System.out.println("3) View rules");
-		// System.out.println("4) Multiplayer play");
-		System.out.println("5) Get inspiration");
-		System.out.println("0) Quit");
 	}
 
 
