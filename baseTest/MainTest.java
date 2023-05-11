@@ -66,6 +66,26 @@ class MainTest {
 		mf.getInspiration();
 	}
 	
+	@Test
+	void testgetDifficultyOption1() {
+		Main mf = new Main();
+		mf.selectDifficulty();
+		assertEquals(1, mf.getDifficulty());
+	}
+	
+	@Test
+	void testgetDifficultyOption2() {
+		Main mf = new Main();
+		mf.selectDifficulty();
+		assertEquals(2, mf.getDifficulty());
+	}
+	
+	@Test
+	void testgetDifficultyOption3() {
+		Main mf = new Main();
+		mf.selectDifficulty();
+		assertEquals(3, mf.getDifficulty());
+	}
 	
 	
 

@@ -21,6 +21,7 @@ public class Main {
 	private static final int GRID_COLUMN = 8;
 	private static final int GRID_ROW = 7;
 	public static final int DOMINO_COUNT = 28;
+	private static final int BONUS = 3;
 	private String playerName;
 	public List<Domino> _d;
 	public List<Domino> _g;
@@ -330,21 +331,7 @@ public class Main {
 				pf.dp.repaint();
 				int c3 = -7;
 				while (c3 != ZERO) {
-					System.out.println();
-					String h5 = "Play menu";
-					String u5 = h5.replaceAll(".", "=");
-					System.out.println(u5);
-					System.out.println(h5);
-					System.out.println(u5);
-					System.out.println("1) Print the grid");
-					System.out.println("2) Print the box");
-					System.out.println("3) Print the dominos");
-					System.out.println("4) Place a domino");
-					System.out.println("5) Unplace a domino");
-					System.out.println("6) Get some assistance");
-					System.out.println("7) Check your score");
-					System.out.println("0) Given up");
-					System.out.println("What do you want to do " + playerName + "?");
+					playMenu();
 					c3 = 9;
 					// make sure the user enters something valid
 					while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
@@ -488,21 +475,10 @@ public class Main {
 						}
 						break;
 					case 7:
-						System.out.printf("%s your score is %d\n", playerName, score);
+						printScore();
 						break;
 					case 6:
-						System.out.println();
-						String h8 = "So you want to cheat, huh?";
-						String u8 = h8.replaceAll(".", "=");
-						System.out.println(u8);
-						System.out.println(h8);
-						System.out.println(u8);
-						System.out.println("1) Find a particular Domino (costs you 500)");
-						System.out.println("2) Which domino is at ... (costs you 500)");
-						System.out.println("3) Find all certainties (costs you 2000)");
-						System.out.println("4) Find all possibilities (costs you 10000)");
-						System.out.println("0) You have changed your mind about cheating");
-						System.out.println("What do you want to do?");
+						cheatMenu();
 						int yy = -9;
 						while (yy < 0 || yy > 4) {
 							try {
@@ -518,9 +494,7 @@ public class Main {
 							case 0:
 								System.out.println("Well done");
 								System.out.println("You get a 3 point bonus for honesty");
-								score++;
-								score++;
-								score++;
+								score += BONUS;
 								cheatCount++;
 								break;
 							case 1:
@@ -702,6 +676,43 @@ public class Main {
 
 		}
 
+	}
+
+	public void printScore() {
+		System.out.printf("%s your score is %d\n", playerName, score);
+	}
+
+	public void cheatMenu() {
+		System.out.println();
+		String h8 = "So you want to cheat, huh?";
+		String u8 = h8.replaceAll(".", "=");
+		System.out.println(u8);
+		System.out.println(h8);
+		System.out.println(u8);
+		System.out.println("1) Find a particular Domino (costs you 500)");
+		System.out.println("2) Which domino is at ... (costs you 500)");
+		System.out.println("3) Find all certainties (costs you 2000)");
+		System.out.println("4) Find all possibilities (costs you 10000)");
+		System.out.println("0) You have changed your mind about cheating");
+		System.out.println("What do you want to do?");
+	}
+
+	public void playMenu() {
+		System.out.println();
+		String h5 = "Play menu";
+		String u5 = h5.replaceAll(".", "=");
+		System.out.println(u5);
+		System.out.println(h5);
+		System.out.println(u5);
+		System.out.println("1) Print the grid");
+		System.out.println("2) Print the box");
+		System.out.println("3) Print the dominos");
+		System.out.println("4) Place a domino");
+		System.out.println("5) Unplace a domino");
+		System.out.println("6) Get some assistance");
+		System.out.println("7) Check your score");
+		System.out.println("0) Given up");
+		System.out.println("What do you want to do " + playerName + "?");
 	}
 
 	public void welcomeMessage() {
