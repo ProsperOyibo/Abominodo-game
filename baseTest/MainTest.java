@@ -30,59 +30,45 @@ class MainTest {
 		assertEquals("prosper",mf.getPlayerName());
 	}
 	
+	
 	@Test
-	void testMenuOption1() {
+	void testMenuOption() {
 		Main mf = new Main();
 		mf.menu.mainMenuOption();
 		assertEquals(1, mf.getOption(1));
 		mf.menu.selectDifficulty();
-	}
-	
-	@Test
-	void testMenuOption2() {
-		Main mf = new Main();
-		mf.menu.mainMenuOption();
 		assertEquals(2, mf.getOption(2));
 		new HighScore("prosper");
-	}
-	
-	@Test
-	void testMenuOption3() {
-		Main mf = new Main();
-		mf.menu.mainMenuOption();;
 		assertEquals(3, mf.getOption(3));
 		new RulesFrame();
-	}
-	
-	@Test
-	void testMenuOption5() {
-		Main mf = new Main();
-		mf.menu.mainMenuOption();
 		assertEquals(5, mf.getOption(5));
 		mf.menu.getInspiration();
 	}
+
 	
 	@Test
-	void testgetDifficultyOption1() {
+	void testPlayMenuOption() {
+		Main mf = new Main();
+		mf.menu.playMenu("prosper");
+		assertEquals(1, mf.getPlayMenuOption(1));
+		assertEquals(2, mf.getPlayMenuOption(2));
+		assertEquals(3, mf.getPlayMenuOption(3));
+		assertEquals(4, mf.getPlayMenuOption(4));
+		assertEquals(5, mf.getPlayMenuOption(5));
+		assertEquals(6, mf.getPlayMenuOption(6));
+		assertEquals(7, mf.getPlayMenuOption(7));
+		assertEquals(0, mf.getPlayMenuOption(0));
+	}
+	
+	@Test
+	void testgetDifficultyOption() {
 		Main mf = new Main();
 		mf.menu.selectDifficulty();
 		assertEquals(1, mf.getDifficulty(1));
-	}
-	
-	@Test
-	void testgetDifficultyOption2() {
-		Main mf = new Main();
-		mf.menu.selectDifficulty();
-		
 		assertEquals(2, mf.getDifficulty(2));
-	}
-	
-	@Test
-	void testgetDifficultyOption3() {
-		Main mf = new Main();
-		mf.menu.selectDifficulty();
 		assertEquals(3, mf.getDifficulty(3));
 	}
+	
 	
 	
 	

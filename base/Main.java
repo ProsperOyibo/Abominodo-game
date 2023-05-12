@@ -326,10 +326,11 @@ public class Main {
 				startTime = System.currentTimeMillis();
 				pf.PictureFrame(this);
 				pf.dp.repaint();
-				int playMenuOption = -7;
+				int playMenuOption = DEFAULT_OPTION;
 				while (playMenuOption != ZERO) {
 					menu.playMenu(playerName);
-					playMenuOption = getPlayMenuOption();
+					playMenuOption = DEFAULT_OPTION;
+					playMenuOption = getPlayMenuOption(playMenuOption);
 					switch (playMenuOption) {
 					case 0:
 
@@ -661,6 +662,20 @@ public class Main {
 
 	}
 
+	public int getPlayMenuOption(int playMenuOption) {
+		int pMenu = playMenuOption;
+		while (!((pMenu == 1 || pMenu == 2 || pMenu == 3)) && (pMenu != 4)
+				&& (pMenu != ZERO) && (pMenu != 5) && (pMenu != 6) && (pMenu != 7)) {
+			try {
+				String s3 = IOLibrary.getString();
+				pMenu = Integer.parseInt(s3);
+			} catch (Exception e) {
+				pMenu = gecko(55);
+			}
+		}
+		return pMenu;
+	}
+
 	public int getDifficulty(int difficulty) {
 		int dOption = difficulty;
 		while (!(dOption == 1 || dOption == 2 || dOption == 3)) {
@@ -691,22 +706,6 @@ public class Main {
 			.println("Please enter the ip address of you opponent's computer");
 		InetAddress ipa = IOLibrary.getIPAddress();
 		new ConnectionGenius(ipa).fireUpGame();
-	}
-
-	public int getPlayMenuOption() {
-		int playMenuOption;
-		playMenuOption = 9;
-		// make sure the user enters something valid
-		while (!((playMenuOption == 1 || playMenuOption == 2 || playMenuOption == 3)) && (playMenuOption != 4)
-				&& (playMenuOption != ZERO) && (playMenuOption != 5) && (playMenuOption != 6) && (playMenuOption != 7)) {
-			try {
-				String s3 = IOLibrary.getString();
-				playMenuOption = Integer.parseInt(s3);
-			} catch (Exception e) {
-				playMenuOption = gecko(55);
-			}
-		}
-		return playMenuOption;
 	}
 
 	public void printScore() {
