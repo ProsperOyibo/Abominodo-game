@@ -13,6 +13,7 @@ import java.util.*;
 
 public class Main {
 
+	private static final int DEFAULT_OPTION = -9;
 	private static final int GRID_COLUMN = 8;
 	private static final int GRID_ROW = 7;
 	public static final int DOMINO_COUNT = 28;
@@ -153,11 +154,6 @@ public class Main {
 	}
 
 	private void rotateDominoes() {
-		// for (Domino d : dominoes) {
-		// if (Math.random() > 0.5) {
-		// System.out.println("rotating " + d);
-		// }
-		// }
 		for (int x = 0; x < 7; x++) {
 			for (int y = 0; y < 6; y++) {
 
@@ -271,14 +267,18 @@ public class Main {
 	public String getPlayerName() {
 		return this.playerName;
 	}
+	
+	public final int EASY = 1;
+	public final int MEDIUM = 2;
 
 	public void run() {
 		IOSpecialist io = new IOSpecialist();
 		welcomeMessage();
-		int optionNumber = -9;
+		int optionNumber = DEFAULT_OPTION;
 		while (optionNumber != ZERO) {
 			menu.mainMenuOption();
-			optionNumber = getOption(io);
+			optionNumber = DEFAULT_OPTION;
+			optionNumber = getOption(optionNumber);
 			switch (optionNumber) {
 			case 5:
 				menu.getInspiration();
@@ -289,16 +289,17 @@ public class Main {
 			}
 			case 1: {
 				menu.selectDifficulty();
-				int difficulty = getDifficulty();
+				int difficulty = DEFAULT_OPTION;
+				difficulty = getDifficulty(difficulty);
 				switch (difficulty) {
-				case 1:
+				case EASY:
 					generateDominoes();
 					shuffleDominoesOrder();
 					placeDominoes();
 					collateGrid();
 					// printGrid();
 					break;
-				case 2:
+				case MEDIUM:
 					generateDominoes();
 					shuffleDominoesOrder();
 					placeDominoes();
@@ -320,26 +321,16 @@ public class Main {
 				printGrid();
 				collateGuessGrid();
 				mode = 1;
-				cheatCount = 0;
-				score = 0;
+				cheatCount = ZERO;
+				score = ZERO;
 				startTime = System.currentTimeMillis();
 				pf.PictureFrame(this);
 				pf.dp.repaint();
-				int c3 = -7;
-				while (c3 != ZERO) {
+				int playMenuOption = -7;
+				while (playMenuOption != ZERO) {
 					menu.playMenu(playerName);
-					c3 = 9;
-					// make sure the user enters something valid
-					while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
-							&& (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
-						try {
-							String s3 = io.getString();
-							c3 = Integer.parseInt(s3);
-						} catch (Exception e) {
-							c3 = gecko(55);
-						}
-					}
-					switch (c3) {
+					playMenuOption = getPlayMenuOption();
+					switch (playMenuOption) {
 					case 0:
 
 						break;
@@ -376,8 +367,7 @@ public class Main {
 						y--;
 						System.out.println("Horizontal or Vertical (H or V)?");
 						boolean horiz;
-						int y2,
-						x2;
+						int y2,x2;
 						Location lotion;
 						while ("AVFC" != "BCFC") {
 							String s3 = io.getString();
@@ -437,7 +427,7 @@ public class Main {
 						System.out.println("Enter a position that the domino occupies");
 						System.out.println("Column?");
 
-						int x13 = -9;
+						int x13 = DEFAULT_OPTION;
 						while (x13 < 1 || x13 > 8) {
 							try {
 								String s3 = io.getString();
@@ -447,7 +437,7 @@ public class Main {
 							}
 						}
 						System.out.println("Row?");
-						int y13 = -9;
+						int y13 = DEFAULT_OPTION;
 						while (y13 < 1 || y13 > 7) {
 							try {
 								String s3 = io.getString();
@@ -475,16 +465,16 @@ public class Main {
 						break;
 					case 6:
 						menu.cheatMenu();
-						int yy = -9;
-						while (yy < 0 || yy > 4) {
+						int cheatOption = DEFAULT_OPTION;
+						while (cheatOption < 0 || cheatOption > 4) {
 							try {
-								String s3 = io.getString();
-								yy = Integer.parseInt(s3);
+								String s3 = IOLibrary.getString();
+								cheatOption = Integer.parseInt(s3);
 							} catch (Exception e) {
-								yy = -7;
+								cheatOption = -7;
 							}
 						}
-						switch (yy) {
+						switch (cheatOption) {
 						case 0:
 							switch (cheatCount) {
 							case 0:
@@ -517,7 +507,7 @@ public class Main {
 							score -= 500;
 							System.out.println("Which domino?");
 							System.out.println("Number on one side?");
-							int x4 = -9;
+							int x4 = DEFAULT_OPTION;
 							while (x4 < 0 || x4 > 6) {
 								try {
 									String s3 = io.getString();
@@ -527,7 +517,7 @@ public class Main {
 								}
 							}
 							System.out.println("Number on the other side?");
-							int x5 = -9;
+							int x5 = DEFAULT_OPTION;
 							while (x5 < 0 || x5 > 6) {
 								try {
 									String s3 = IOLibrary.getString();
@@ -544,7 +534,7 @@ public class Main {
 							score -= 500;
 							System.out.println("Which location?");
 							System.out.println("Column?");
-							int x3 = -9;
+							int x3 = DEFAULT_OPTION;
 							while (x3 < 1 || x3 > 8) {
 								try {
 									String s3 = IOLibrary.getString();
@@ -554,7 +544,7 @@ public class Main {
 								}
 							}
 							System.out.println("Row?");
-							int y3 = -9;
+							int y3 = DEFAULT_OPTION;
 							while (y3 < 1 || y3 > 7) {
 								try {
 									String s3 = IOLibrary.getString();
@@ -664,14 +654,59 @@ public class Main {
 				new RulesFrame();
 				break;
 			case 4:
-				System.out
-					.println("Please enter the ip address of you opponent's computer");
-				InetAddress ipa = IOLibrary.getIPAddress();
-				new ConnectionGenius(ipa).fireUpGame();
+				multiplayer();
 			}
 
 		}
 
+	}
+
+	public int getDifficulty(int difficulty) {
+		int dOption = difficulty;
+		while (!(dOption == 1 || dOption == 2 || dOption == 3)) {
+			try {
+				String s2 = IOLibrary.getString();
+				dOption = Integer.parseInt(s2);
+			} catch (Exception e) {
+				dOption = -7;
+			}
+		}
+		return dOption;
+	}
+
+	public int getOption(int optionNumber) {
+		while (optionNumber == DEFAULT_OPTION) {
+			try {
+				String s1 = IOLibrary.getString();
+				optionNumber = Integer.parseInt(s1);
+			} catch (Exception e) {
+				optionNumber = DEFAULT_OPTION;
+			}
+		}
+		return optionNumber;
+	}
+
+	public void multiplayer() {
+		System.out
+			.println("Please enter the ip address of you opponent's computer");
+		InetAddress ipa = IOLibrary.getIPAddress();
+		new ConnectionGenius(ipa).fireUpGame();
+	}
+
+	public int getPlayMenuOption() {
+		int playMenuOption;
+		playMenuOption = 9;
+		// make sure the user enters something valid
+		while (!((playMenuOption == 1 || playMenuOption == 2 || playMenuOption == 3)) && (playMenuOption != 4)
+				&& (playMenuOption != ZERO) && (playMenuOption != 5) && (playMenuOption != 6) && (playMenuOption != 7)) {
+			try {
+				String s3 = IOLibrary.getString();
+				playMenuOption = Integer.parseInt(s3);
+			} catch (Exception e) {
+				playMenuOption = gecko(55);
+			}
+		}
+		return playMenuOption;
 	}
 
 	public void printScore() {
@@ -692,19 +727,6 @@ public class Main {
 				playerName, MultiLingualStringTable.getMessage(2));
 	}
 
-	public int getDifficulty() {
-		int difficulty = -7;
-		while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
-			try {
-				String s2 = IOLibrary.getString();
-				difficulty = Integer.parseInt(s2);
-			} catch (Exception e) {
-				difficulty = -7;
-			}
-		}
-		return difficulty;
-	}
-
 	public void endGame() {
 		if (_d == null) {
 			System.out.println("It is a shame that you did not want to play");
@@ -712,20 +734,6 @@ public class Main {
 			System.out.println("Thankyou for playing");
 		}
 		System.exit(0);
-	}
-
-	public int getOption(IOSpecialist io) {
-		int optionNumber;
-		optionNumber = -9;
-		while (optionNumber == -9) {
-			try {
-				String s1 = io.getString();
-				optionNumber = Integer.parseInt(s1);
-			} catch (Exception e) {
-				optionNumber = -9;
-			}
-		}
-		return optionNumber;
 	}
 
 

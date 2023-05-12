@@ -33,36 +33,32 @@ class MainTest {
 	@Test
 	void testMenuOption1() {
 		Main mf = new Main();
-		IOSpecialist io = new IOSpecialist();
 		mf.menu.mainMenuOption();
-		assertEquals(1, mf.getOption(io));
+		assertEquals(1, mf.getOption(1));
 		mf.menu.selectDifficulty();
 	}
 	
 	@Test
 	void testMenuOption2() {
 		Main mf = new Main();
-		IOSpecialist io = new IOSpecialist();
 		mf.menu.mainMenuOption();
-		assertEquals(2, mf.getOption(io));
+		assertEquals(2, mf.getOption(2));
 		new HighScore("prosper");
 	}
 	
 	@Test
 	void testMenuOption3() {
 		Main mf = new Main();
-		IOSpecialist io = new IOSpecialist();
 		mf.menu.mainMenuOption();;
-		assertEquals(3, mf.getOption(io));
+		assertEquals(3, mf.getOption(3));
 		new RulesFrame();
 	}
 	
 	@Test
 	void testMenuOption5() {
 		Main mf = new Main();
-		IOSpecialist io = new IOSpecialist();
 		mf.menu.mainMenuOption();
-		assertEquals(5, mf.getOption(io));
+		assertEquals(5, mf.getOption(5));
 		mf.menu.getInspiration();
 	}
 	
@@ -70,7 +66,7 @@ class MainTest {
 	void testgetDifficultyOption1() {
 		Main mf = new Main();
 		mf.menu.selectDifficulty();
-		assertEquals(1, mf.getDifficulty());
+		assertEquals(1, mf.getDifficulty(1));
 	}
 	
 	@Test
@@ -78,15 +74,16 @@ class MainTest {
 		Main mf = new Main();
 		mf.menu.selectDifficulty();
 		
-		assertEquals(2, mf.getDifficulty());
+		assertEquals(2, mf.getDifficulty(2));
 	}
 	
 	@Test
 	void testgetDifficultyOption3() {
 		Main mf = new Main();
 		mf.menu.selectDifficulty();
-		assertEquals(3, mf.getDifficulty());
+		assertEquals(3, mf.getDifficulty(3));
 	}
+	
 	
 	
 
