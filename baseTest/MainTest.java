@@ -57,6 +57,7 @@ class MainTest {
 		assertEquals(5, mf.getPlayMenuOption(5));
 		assertEquals(6, mf.getPlayMenuOption(6));
 		assertEquals(7, mf.getPlayMenuOption(7));
+		mf.printScore();
 		assertEquals(0, mf.getPlayMenuOption(0));
 	}
 	

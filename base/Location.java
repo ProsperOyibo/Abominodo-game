@@ -49,6 +49,7 @@ public class Location {
 			g.drawLine(20 + see * 20, 20, 20 + see * 20, 160);
 		}
 	}
+	
 
 	public static int getInt() {
 		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
