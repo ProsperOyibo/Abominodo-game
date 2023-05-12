@@ -2,9 +2,6 @@ package baseTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import org.junit.jupiter.api.Test;
 
 import base.Location;

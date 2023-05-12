@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import base.HighScore;
-import base.IOSpecialist;
 import base.Main;
 import base.RulesFrame;
 

@@ -11,11 +11,13 @@ import java.util.Date;
 public class HighScore {
 	
 	public String playerName;
+	public File scoreFile = new File("score.txt");
 	
 	public HighScore (String name) {
 		playerName = name;
 		viewHighScore();
 	}
+	
 	
 	public void viewHighScore() {
 		String h4 = "High Scores";
@@ -24,7 +26,7 @@ public class HighScore {
 		System.out.println(h4);
 		System.out.println(u4);
 
-		File f = saveHighScore();
+		File f = saveHighScore(scoreFile);
 		addDate(f);
 	}
 
@@ -48,8 +50,8 @@ public class HighScore {
 		}
 	}
 
-	public File saveHighScore() {
-		File f = new File("score.txt");
+	public File saveHighScore(File scoreFile) {
+		File f = scoreFile;
 		if (!(f.exists() && f.isFile() && f.canRead())) {
 			System.out.println("Creating new score table");
 			try {
