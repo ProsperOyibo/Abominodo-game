@@ -1,9 +1,8 @@
-package baseTest;
+package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
 import base.HighScore;
 import base.Main;
 import base.RulesFrame;
